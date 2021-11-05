@@ -103,7 +103,7 @@ blocks.forEach(block => {
       setTimeout(function() {
         confirm('Clear!')
         shuffle()
-      }, 300);
+      }, 200);
     }
   })
 })
@@ -145,6 +145,6 @@ document.addEventListener('keydown', function(event) {
     setTimeout(function() {
       confirm('Clear!')
       shuffle()
-    }, 300);
+    }, 200);
   }
 })

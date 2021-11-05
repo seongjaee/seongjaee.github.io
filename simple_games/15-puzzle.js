@@ -23,6 +23,8 @@ const setBlank = function(newY, newX) {
   // blank 클래스 조정
   blankBlock.removeAttribute('class')
   newBlankBlock.setAttribute('class', 'blank')
+  blankPoint[0] = newY
+  blankPoint[1] = newX
 }
 
 
@@ -81,30 +83,57 @@ const isSolvable = function() {
   return !(cnt % 2)
 }
 
-// 사용자 입력에 따른 동작
+// 모바일 터치 입력에 따른 동작
+const restartBtn = document.querySelector('#restartBtn')
+restartBtn.addEventListener('touchend', function(event) {
+  shuffle()
+})
+
+const blocks = document.querySelectorAll('td')
+blocks.forEach(block => {
+  block.addEventListener('touchstart', function(event) {
+    const y = block.id[1]
+    const x = block.id[2]
+    const dy = y - blankPoint[0]
+    const dx = x - blankPoint[1]
+    if ((dy === 0 && Math.abs(dx) === 1) || (dx === 0 && Math.abs(dy) === 1)){
+      setBlank(y, x)
+    }
+    if (isCleared()){
+      setTimeout(function() {
+        confirm('Clear!')
+        shuffle()
+      }, 300);
+    }
+  })
+})
+
+
+
+// 키보드 입력에 따른 동작
 document.addEventListener('keydown', function(event) {
   switch (event.code) {
     case 'ArrowUp': {
       if (blankPoint[0] < 3){
-        setBlank(++blankPoint[0], blankPoint[1])
+        setBlank(blankPoint[0] + 1, blankPoint[1])
       }
       break
     }
     case 'ArrowDown': {
       if (blankPoint[0] > 0){
-        setBlank(--blankPoint[0], blankPoint[1])
+        setBlank(blankPoint[0] - 1, blankPoint[1])
       }
       break
     }
     case 'ArrowLeft': {
       if (blankPoint[1] < 3){
-        setBlank(blankPoint[0], ++blankPoint[1])
+        setBlank(blankPoint[0], blankPoint[1] + 1)
       }
       break
     }
     case 'ArrowRight': {
       if (blankPoint[1] > 0){
-        setBlank(blankPoint[0], --blankPoint[1])
+        setBlank(blankPoint[0], blankPoint[1] - 1)
       }
       break
     }

@@ -101,12 +101,6 @@ const eventHandler = function(block) {
   if ((dy === 0 && Math.abs(dx) === 1) || (dx === 0 && Math.abs(dy) === 1)){
     setBlank(y, x)
   }
-  if (isCleared()){
-    setTimeout(function() {
-      confirm('Clear!')
-      shuffle()
-    }, 200);
-  }
 }
 
 const blocks = document.querySelectorAll('td')
@@ -117,6 +111,12 @@ blocks.forEach(block => {
   block.addEventListener('click', function(event) {
     eventHandler(block)
   })
+  if (isCleared()){
+    setTimeout(function() {
+      confirm('Clear!')
+      shuffle()
+    }, 200);
+  }
 })
 
 

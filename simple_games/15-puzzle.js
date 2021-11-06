@@ -112,10 +112,9 @@ const clickEventHandler = function(block) {
 const blocks = document.querySelectorAll('td')
 blocks.forEach(block => {
   block.addEventListener('click', function(event) {
-    eventHandler(block)
+    clickEventHandler(block)
   })
 })
-
 
 // 키보드 입력에 따른 동작
 document.addEventListener('keydown', function(event) {

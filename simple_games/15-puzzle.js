@@ -9,15 +9,15 @@ const blocksIds = [
   '_30', '_31', '_32', '_33',
 ]
 
-// 빈 칸 좌표. 사용자 입력에 따라 갱신됨.
+// 빈 칸 좌표. 사용자 입력에 따라 갱신
 const blankPoint = [3, 3]
 
 const restartBtn = document.querySelector('#restartBtn')
 
-// blankBlockPoint에 따라 HTML요소에 class=blank 부여, innerText swap
-const setBlank = function(newY, newX) {
+// 입력한 y, x좌표를 빈 칸으로 만들기
+const setBlank = function(y, x) {
   const blankBlock = document.querySelector('.blank')
-  const newBlankBlock = document.querySelector(`#_${newY}${newX}`)
+  const newBlankBlock = document.querySelector(`#_${y}${x}`)
   // 숫자 swap
   const temp = blankBlock.innerText
   blankBlock.innerText = newBlankBlock.innerText
@@ -25,8 +25,8 @@ const setBlank = function(newY, newX) {
   // blank 클래스 조정
   blankBlock.removeAttribute('class')
   newBlankBlock.setAttribute('class', 'blank')
-  blankPoint[0] = newY
-  blankPoint[1] = newX
+  blankPoint[0] = y
+  blankPoint[1] = x
 }
 
 // 보드판 섞기
@@ -93,7 +93,7 @@ restartBtn.addEventListener('click', function(event) {
   shuffle()
 })
 
-const eventHandler = function(block) {
+const clickEventHandler = function(block) {
   const y = block.id[1]
   const x = block.id[2]
   const dy = y - blankPoint[0]
@@ -101,22 +101,19 @@ const eventHandler = function(block) {
   if ((dy === 0 && Math.abs(dx) === 1) || (dx === 0 && Math.abs(dy) === 1)){
     setBlank(y, x)
   }
-}
-
-const blocks = document.querySelectorAll('td')
-blocks.forEach(block => {
-  block.addEventListener('touchend', function(event) {
-    eventHandler(block)
-  })
-  block.addEventListener('click', function(event) {
-    eventHandler(block)
-  })
   if (isCleared()){
     setTimeout(function() {
       confirm('Clear!')
       shuffle()
     }, 200);
   }
+}
+
+const blocks = document.querySelectorAll('td')
+blocks.forEach(block => {
+  block.addEventListener('click', function(event) {
+    eventHandler(block)
+  })
 })
 
 

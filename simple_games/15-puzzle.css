@@ -30,6 +30,7 @@ td {
 }
 body {
   background-color: #BBADA0;
+  user-select: none;
 }
 
 @media (max-width: 576px) {
@@ -49,5 +50,6 @@ body {
   }
   body {
     padding-top: 5rem;
+    user-select: none;
   }
 }

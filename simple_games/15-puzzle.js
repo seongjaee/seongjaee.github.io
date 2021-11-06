@@ -12,6 +12,8 @@ const blocksIds = [
 // 빈 칸 좌표. 사용자 입력에 따라 갱신됨.
 const blankPoint = [3, 3]
 
+const restartBtn = document.querySelector('#restartBtn')
+
 // blankBlockPoint에 따라 HTML요소에 class=blank 부여, innerText swap
 const setBlank = function(newY, newX) {
   const blankBlock = document.querySelector('.blank')
@@ -26,7 +28,6 @@ const setBlank = function(newY, newX) {
   blankPoint[0] = newY
   blankPoint[1] = newX
 }
-
 
 // 보드판 섞기
 const shuffle = function() {
@@ -83,31 +84,40 @@ const isSolvable = function() {
   return !(cnt % 2)
 }
 
-// 모바일 터치 입력에 따른 동작
-const restartBtn = document.querySelector('#restartBtn')
+// 마우스 클릭, 모바일 터치 입력에 따른 동작
 restartBtn.addEventListener('touchend', function(event) {
   shuffle()
 })
 
-const blocks = document.querySelectorAll('td')
-blocks.forEach(block => {
-  block.addEventListener('touchstart', function(event) {
-    const y = block.id[1]
-    const x = block.id[2]
-    const dy = y - blankPoint[0]
-    const dx = x - blankPoint[1]
-    if ((dy === 0 && Math.abs(dx) === 1) || (dx === 0 && Math.abs(dy) === 1)){
-      setBlank(y, x)
-    }
-    if (isCleared()){
-      setTimeout(function() {
-        confirm('Clear!')
-        shuffle()
-      }, 200);
-    }
-  })
+restartBtn.addEventListener('click', function(event) {
+  shuffle()
 })
 
+const eventHandler = function(block) {
+  const y = block.id[1]
+  const x = block.id[2]
+  const dy = y - blankPoint[0]
+  const dx = x - blankPoint[1]
+  if ((dy === 0 && Math.abs(dx) === 1) || (dx === 0 && Math.abs(dy) === 1)){
+    setBlank(y, x)
+  }
+  if (isCleared()){
+    setTimeout(function() {
+      confirm('Clear!')
+      shuffle()
+    }, 200);
+  }
+}
+
+const blocks = document.querySelectorAll('td')
+blocks.forEach(block => {
+  block.addEventListener('touchend', function(event) {
+    eventHandler(block)
+  })
+  block.addEventListener('click', function(event) {
+    eventHandler(block)
+  })
+})
 
 
 // 키보드 입력에 따른 동작

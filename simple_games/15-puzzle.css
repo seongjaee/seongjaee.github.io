@@ -37,6 +37,7 @@ body {
     font-size: 2rem;
   }
   h2 {
+    margin-top: 3rem;
     font-size: 1.5rem;
   }
   td {
@@ -45,5 +46,8 @@ body {
     border-radius: 0.6rem;
     border: solid 0.15rem #BBADA0;
     font-size: 2rem;
+  }
+  body {
+    padding-top: 5rem;
   }
 }

@@ -26,7 +26,7 @@ const onClick = function(event) {
   } 
 }
 
-const isOver = function(selectedCells) {
+const isWinner = function(selectedCells) {
   const counter = [0, 0, 0, 0, 0, 0, 0, 0]
   for (cell of selectedCells) {
     const row = Number(cell[1])
@@ -43,19 +43,28 @@ const isOver = function(selectedCells) {
   return counter.includes(3)
 }
 
+const isOver = function() {
+  return selectedOs.length + selectedXs.length === 9
+}
+
 
 cells.forEach(cell => {
   cell.addEventListener('click', event => {
     onClick(event)
-    if (isOver(selectedOs)){
+    if (isWinner(selectedOs)){
       setTimeout(function() {
         alert('O Win!')
         init()
       }, 150)
       
-    } else if (isOver(selectedXs)) {
+    } else if (isWinner(selectedXs)) {
       setTimeout(function() {
         alert('X Win!')
+        init()
+      }, 150)
+    } else if (isOver()) {
+      setTimeout(function() {
+        alert('Draw O X!')
         init()
       }, 150)
     }

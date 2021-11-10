@@ -12,7 +12,7 @@ const init = function() {
   })
 }
 
-const onClick = function(event) {
+const onSelect = function(event) {
   if (!event.target.innerText) {
     if (turn === 0) {
       turn = 1
@@ -47,26 +47,27 @@ const isOver = function() {
   return selectedOs.length + selectedXs.length === 9
 }
 
+const onClick = function(event) {
+  onSelect(event)
+  if (isWinner(selectedOs)){
+    setTimeout(function() {
+      alert('O Win!')
+      init()
+    }, 150)
+    
+  } else if (isWinner(selectedXs)) {
+    setTimeout(function() {
+      alert('X Win!')
+      init()
+    }, 150)
+  } else if (isOver()) {
+    setTimeout(function() {
+      alert('Draw O X!')
+      init()
+    }, 150)
+  }
+}
 
 cells.forEach(cell => {
-  cell.addEventListener('click', event => {
-    onClick(event)
-    if (isWinner(selectedOs)){
-      setTimeout(function() {
-        alert('O Win!')
-        init()
-      }, 150)
-      
-    } else if (isWinner(selectedXs)) {
-      setTimeout(function() {
-        alert('X Win!')
-        init()
-      }, 150)
-    } else if (isOver()) {
-      setTimeout(function() {
-        alert('Draw O X!')
-        init()
-      }, 150)
-    }
-  })
+  cell.addEventListener('click', event => onClick(event))
 })

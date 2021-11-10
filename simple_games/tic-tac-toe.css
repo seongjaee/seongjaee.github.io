@@ -17,12 +17,13 @@ table {
 
 td {
   border: solid 0.25rem #3d332a;
-  font-size: 3rem;
+  font-size: 4rem;
   color: #55473A;
   background-color: #ECDFC7;
   width: 6rem;
   height: 6rem;
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 td:first-child {

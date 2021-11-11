@@ -34,6 +34,10 @@ td {
   font-family: 'Quicksand', sans-serif;
 }
 
+td:hover {
+  background-color: #ebd5ae;
+}
+
 td:first-child {
   border-left: 0;
 }

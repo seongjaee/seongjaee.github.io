@@ -1,9 +1,16 @@
+window.onload = function() {
+  init()
+}
+
 let selectedOs = []
 let selectedXs = []
 let turn = 0
+
+const h2Tag = document.querySelector('h2')
 const cells = document.querySelectorAll('td')
 
 const init = function() {
+  h2Tag.innerText = "O 's turn"
   selectedOs = []
   selectedXs = []
   turn = 0
@@ -18,10 +25,12 @@ const onSelect = function(event) {
       turn = 1
       event.target.innerText = 'O'
       selectedOs.push(event.target.id)
+      h2Tag.innerText = "X 's turn"
     } else {
       turn = 0
       event.target.innerText = 'X'
       selectedXs.push(event.target.id)
+      h2Tag.innerText = "O 's turn"
     }
   } 
 }
@@ -51,18 +60,18 @@ const onClick = function(event) {
   onSelect(event)
   if (isWinner(selectedOs)){
     setTimeout(function() {
-      alert('O Win!')
+      alert('O Win !')
       init()
     }, 150)
     
   } else if (isWinner(selectedXs)) {
     setTimeout(function() {
-      alert('X Win!')
+      alert('X Win !')
       init()
     }, 150)
   } else if (isOver()) {
     setTimeout(function() {
-      alert('Draw O X!')
+      alert('Draw !')
       init()
     }, 150)
   }

@@ -2,10 +2,17 @@ body {
   background-color: #BBADA0;
   padding-top: 4rem;
 }
+
 h1 {
   text-align: center;
   font-family: 'Quicksand', sans-serif;
   font-size: 3rem;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2rem;
 }
 
 table {

@@ -2,21 +2,21 @@
   font-size: 0;
   background-color: #CDC0B4;
 }
+
 h1 {
   font-size: 3rem;
-  font-family: 'Titillium Web', sans-serif;
-  text-align: center;
 }
+
 h2 {
   font-size: 2rem;
-  font-family: 'Titillium Web', sans-serif;
   color: #f3efeb;
-  text-align: center;
 }
+
 table {
   margin-left: auto;
   margin-right: auto;
 }
+
 td {
   height: 6rem;
   width: 6rem;
@@ -26,21 +26,25 @@ td {
   border-radius: 0.6rem;
   border: solid 0.3rem #BBADA0;
   color: #55473A;
-  font-family: 'Titillium Web', sans-serif;
 }
+
 body {
+  font-family: 'Titillium Web', sans-serif;
   background-color: #BBADA0;
   user-select: none;
+  text-align: center;
 }
 
 @media (max-width: 576px) {
   h1 {
     font-size: 2rem;
   }
+
   h2 {
     margin-top: 3rem;
     font-size: 1.5rem;
   }
+
   td {
     height: 3.75rem;
     width: 3.75rem;
@@ -48,6 +52,7 @@ body {
     border: solid 0.15rem #BBADA0;
     font-size: 2rem;
   }
+
   body {
     padding-top: 5rem;
     user-select: none;

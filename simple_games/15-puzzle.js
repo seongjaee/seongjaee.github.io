@@ -12,7 +12,7 @@ const blocksIds = [
 // 빈 칸 좌표. 사용자 입력에 따라 갱신
 const blankPoint = [3, 3]
 
-const restartBtn = document.querySelector('#restartBtn')
+const suffleBtn = document.querySelector('#suffleBtn')
 
 // 입력한 y, x좌표를 빈 칸으로 만들기
 const setBlank = function(y, x) {
@@ -85,11 +85,11 @@ const isSolvable = function() {
 }
 
 // 마우스 클릭, 모바일 터치 입력에 따른 동작
-restartBtn.addEventListener('touchend', function(event) {
+suffleBtn.addEventListener('touchend', function(event) {
   shuffle()
 })
 
-restartBtn.addEventListener('click', function(event) {
+suffleBtn.addEventListener('click', function(event) {
   shuffle()
 })
 

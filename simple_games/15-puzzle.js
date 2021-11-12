@@ -105,7 +105,7 @@ const clickEventHandler = function(block) {
     setTimeout(function() {
       confirm('Clear!')
       shuffle()
-    }, 200);
+    }, 0);
   }
 }
 
@@ -151,6 +151,6 @@ document.addEventListener('keydown', function(event) {
     setTimeout(function() {
       confirm('Clear!')
       shuffle()
-    }, 200);
+    }, 0);
   }
 })

@@ -1,0 +1,27 @@
+body {
+  background-color: #BBADA0;
+  padding-top: 4rem;
+  user-select: none;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.5rem;
+  border-collapse: collapse;
+}
+
+td {
+  border: solid 0.2rem #3d332a;
+  font-size: 1rem;
+  color: #55473A;
+  background-color: #ECDFC7;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
+td:hover {
+  background-color: #e2d6be;
+}

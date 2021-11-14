@@ -7,7 +7,6 @@ window.addEventListener('contextmenu', function (e) {
    e.preventDefault()
 }, false);
 
-
 window.onload = function(){
   initGame()
 }
@@ -108,7 +107,7 @@ function checkPoint(y, x) {
     for (let i=0; i<8; i++) {
       const ny = y + DY[i]
       const nx = x + DX[i]
-      if (0 <= ny < Y && 0 < nx <= X) {
+      if (0 <= ny && ny < Y && 0 <= nx && nx < X) {
         checkPoint(ny, nx)
       }
     }
@@ -121,21 +120,61 @@ function onClick(event) {
   const yxArr = event.target.id.split('-')
   const y = Number(yxArr[0])
   const x = Number(yxArr[1])
-  checkPoint(y, x)
-  if (isFinish()) {
-    setTimeout(() => {
-      confirm('Clear!')
-      initGame()
-    }, 0)
+  if (event.target.innerText !== '*'){
+    checkPoint(y, x)
+    if (isFinish()) {
+      setTimeout(() => {
+        confirm('Clear!')
+        initGame()
+      }, 0)
+    }
   }
 }
 
 function onRightClick(event) {
   event.preventDefault()
+  const yxArr = event.target.id.split('-')
+  const y = Number(yxArr[0])
+  const x = Number(yxArr[1])
+  if (visited[y][x]) {
+    return
+  }
   if (event.target.innerText === '*') {
     event.target.innerText = ''
   } else {
     event.target.innerText = '*'
+  }
+}
+
+function onDoubleClick(event) {
+  const yxArr = event.target.id.split('-')
+  const y = Number(yxArr[0])
+  const x = Number(yxArr[1])
+  let count = 0
+  for (let i=0; i<8; i++) {
+    const ny = y + DY[i]
+    const nx = x + DX[i]
+    if (0 <= ny && ny < Y && 0 <= nx && nx < X) {
+      if (document.getElementById(`${ny}-${nx}`).innerText === '*'){
+        count++
+      }
+    }
+  }
+  if (grid[y][x] === count) {
+    for (let i=0; i<8; i++) {
+      const ny = y + DY[i]
+      const nx = x + DX[i]
+      if (0 <= ny && ny < Y && 0 <= nx && nx < X) {
+        if (document.getElementById(`${ny}-${nx}`).innerText !== '*')
+        checkPoint(ny, nx)
+        if (isFinish()) {
+          setTimeout(() => {
+            confirm('Clear!')
+            initGame()
+          }, 0)
+        }
+      }
+    }
   }
 }
 
@@ -154,7 +193,7 @@ function isFinish() {
 function initGame() {
   grid = []
   visited = []
-   cells = []
+  cells = []
   cellIds = []
   mineIdList = []
   flaggedIdList = []
@@ -166,5 +205,6 @@ function initGame() {
   cells.forEach(cell => {
     cell.addEventListener('click', event => onClick(event))
     cell.addEventListener('contextmenu', event => onRightClick(event))
+    cell.addEventListener('dblclick', event => onDoubleClick(event))
   })
 }

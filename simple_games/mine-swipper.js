@@ -11,10 +11,14 @@ window.onload = function(){
   initGame()
 }
 
-const Y = 7
-const X = 7
+const Y = 10
+const X = 12
 const DX = [-1, 0, 1, -1, 1, -1, 0, 1]
 const DY = [-1, -1, -1, 0, 0, 1, 1, 1] 
+
+const markedImgSrc = 'marker.png'
+const markedImgTag = document.createElement('img')
+markedImgTag.setAttribute('src', markedImgSrc)
 
 const table = document.querySelector('table')
 const setMineNumber = (y, x) => Math.floor((y * x) / 8)
@@ -97,7 +101,7 @@ function checkPoint(y, x) {
   const pointTd = document.getElementById(`${y}-${x}`)
   pointTd.setAttribute('class', 'visited')
   if (grid[y][x] === -1) {
-    pointTd.innerText = '*'
+    pointTd.innerText = '●'
     setTimeout(() => {
       confirm('Boom!')
       initGame()
@@ -122,12 +126,12 @@ function onClick(event) {
   const x = Number(yxArr[1])
   if (event.target.innerText !== '*'){
     checkPoint(y, x)
-    if (isFinish()) {
-      setTimeout(() => {
-        confirm('Clear!')
-        initGame()
-      }, 0)
-    }
+  }
+  if (isFinish()) {
+    setTimeout(() => {
+      confirm('Clear!')
+      initGame()
+    }, 1)
   }
 }
 
@@ -139,15 +143,19 @@ function onRightClick(event) {
   if (visited[y][x]) {
     return
   }
-  if (event.target.innerText === '*') {
-    event.target.innerText = ''
+  if (event.target.children.length) {
+    const imgTag = event.target.children[0]
+    event.target.removeChild(imgTag)
+
   } else {
-    event.target.innerText = '*'
+    const markedImgTag = document.createElement('img')
+    markedImgTag.setAttribute('src', markedImgSrc)
+    event.target.appendChild(markedImgTag)
   }
 }
 
 function onDoubleClick(event) {
-  const yxArr = event.target.id.split('-')
+  const yxArr = event.target.id.split('-') 
   const y = Number(yxArr[0])
   const x = Number(yxArr[1])
   let count = 0
@@ -155,7 +163,7 @@ function onDoubleClick(event) {
     const ny = y + DY[i]
     const nx = x + DX[i]
     if (0 <= ny && ny < Y && 0 <= nx && nx < X) {
-      if (document.getElementById(`${ny}-${nx}`).innerText === '*'){
+      if (document.getElementById(`${ny}-${nx}`).children.length){
         count++
       }
     }
@@ -165,16 +173,16 @@ function onDoubleClick(event) {
       const ny = y + DY[i]
       const nx = x + DX[i]
       if (0 <= ny && ny < Y && 0 <= nx && nx < X) {
-        if (document.getElementById(`${ny}-${nx}`).innerText !== '*')
+        if (!document.getElementById(`${ny}-${nx}`).children.length)
         checkPoint(ny, nx)
-        if (isFinish()) {
-          setTimeout(() => {
-            confirm('Clear!')
-            initGame()
-          }, 0)
-        }
       }
     }
+  }
+  if (isFinish()) {
+    setTimeout(() => {
+      confirm('Clear!')
+      initGame()
+    }, 1)
   }
 }
 

@@ -1,5 +1,5 @@
 body {
-  background-color: #BBADA0;
+  background-color: #f2fdff;
   padding-top: 4rem;
   user-select: none;
 }
@@ -7,21 +7,30 @@ body {
 table {
   margin-left: auto;
   margin-right: auto;
-  border-radius: 0.5rem;
-  border-collapse: collapse;
 }
 
 td {
-  border: solid 0.2rem #3d332a;
+  border-radius: 0.5rem;
   font-size: 1rem;
-  color: #55473A;
-  background-color: #ECDFC7;
+  color: #011640;
+  background-color: #65768C;
   width: 2rem;
   height: 2rem;
   text-align: center;
-  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #011640;
 }
 
 .visited {
-  background-color: #eee;
+  background-color: #a8b3c0;
+}
+
+img {
+  width: 0.7em;
+  height: 1em;
 }

@@ -1,5 +1,19 @@
-const Y = 10
-const X = 12
+// 우클릭 방지
+document.oncontextmenu = function () {
+  return false;
+};
+
+window.addEventListener('contextmenu', function (e) {
+   e.preventDefault()
+}, false);
+
+
+window.onload = function(){
+  initGame()
+}
+
+const Y = 7
+const X = 7
 const DX = [-1, 0, 1, -1, 1, -1, 0, 1]
 const DY = [-1, -1, -1, 0, 0, 1, 1, 1] 
 
@@ -7,11 +21,12 @@ const table = document.querySelector('table')
 const setMineNumber = (y, x) => Math.floor((y * x) / 8)
 let mineNumber = setMineNumber(Y, X)
 
-const grid = []
-const visited = []
+let grid = []
+let visited = []
 let cells = []
-const cellIds = []
-const mineIdList = []
+let cellIds = []
+let mineIdList = []
+let flaggedIdList = []
 
 function initGrid() {
   for (let i=0; i<Y; i++) {
@@ -23,6 +38,7 @@ function initGrid() {
 }
 
 function makeTable() {
+  table.innerHTML = ''
   for (let i=0; i < Y; i++) {
     const trTag = document.createElement('tr')
     const tr = table.appendChild(trTag)
@@ -82,7 +98,11 @@ function checkPoint(y, x) {
   const pointTd = document.getElementById(`${y}-${x}`)
   pointTd.setAttribute('class', 'visited')
   if (grid[y][x] === -1) {
-    pointTd.innerText = grid[y][x]
+    pointTd.innerText = '*'
+    setTimeout(() => {
+      confirm('Boom!')
+      initGame()
+    }, 0)
     
   } else if (!grid[y][x]) {
     for (let i=0; i<8; i++) {
@@ -97,43 +117,54 @@ function checkPoint(y, x) {
   }
 }
 
-document.oncontextmenu = function () {
-  return false;
-};
+function onClick(event) {
+  const yxArr = event.target.id.split('-')
+  const y = Number(yxArr[0])
+  const x = Number(yxArr[1])
+  checkPoint(y, x)
+  if (isFinish()) {
+    setTimeout(() => {
+      confirm('Clear!')
+      initGame()
+    }, 0)
+  }
+}
 
-window.addEventListener('contextmenu', function (e) {
-   e.preventDefault()
-}, false);
+function onRightClick(event) {
+  event.preventDefault()
+  if (event.target.innerText === '*') {
+    event.target.innerText = ''
+  } else {
+    event.target.innerText = '*'
+  }
+}
 
+function isFinish() {
+  let result = 0
+  visited.forEach(row => {
+    row.forEach(v => {
+      if (v) {
+        result++
+      }
+    })
+  })
+  return result === X * Y - mineNumber
+}
 
-window.onload = function(){
+function initGame() {
+  grid = []
+  visited = []
+   cells = []
+  cellIds = []
+  mineIdList = []
+  flaggedIdList = []
   initGrid()
   makeTable(Y, X)
   plantMines()
   countMineAround()
   cells = document.querySelectorAll('td')
   cells.forEach(cell => {
-    cell.addEventListener('click', function(event) {
-      const yxArr = cell.id.split('-')
-      const y = Number(yxArr[0])
-      const x = Number(yxArr[1])
-      checkPoint(y, x)
-    })
-    cell.addEventListener('contextmenu', function(event) {
-      event.preventDefault()
-      if (event.target.innerText === '*') {
-        event.target.innerText = ''
-      } else {
-        event.target.innerText = '*'
-      }
-    })
+    cell.addEventListener('click', event => onClick(event))
+    cell.addEventListener('contextmenu', event => onRightClick(event))
   })
 }
-
-
-
-
-
-
-
-

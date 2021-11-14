@@ -9,7 +9,7 @@ let turn = 0
 const h2Tag = document.querySelector('h2')
 const cells = document.querySelectorAll('td')
 
-const init = function() {
+function init() {
   h2Tag.innerText = "O 's turn"
   selectedOs = []
   selectedXs = []
@@ -19,7 +19,7 @@ const init = function() {
   })
 }
 
-const onSelect = function(event) {
+function onSelect(event) {
   if (!event.target.innerText) {
     if (turn === 0) {
       turn = 1
@@ -32,10 +32,10 @@ const onSelect = function(event) {
       selectedXs.push(event.target.id)
       h2Tag.innerText = "O 's turn"
     }
-  } 
+  }
 }
 
-const isWinner = function(selectedCells) {
+function isWinner(selectedCells) {
   const counter = [0, 0, 0, 0, 0, 0, 0, 0]
   for (cell of selectedCells) {
     const row = Number(cell[1])
@@ -52,11 +52,11 @@ const isWinner = function(selectedCells) {
   return counter.includes(3)
 }
 
-const isOver = function() {
+function isOver() {
   return selectedOs.length + selectedXs.length === 9
 }
 
-const onClick = function(event) {
+function onClick(event) {
   onSelect(event)
   if (isWinner(selectedOs)){
     setTimeout(function() {

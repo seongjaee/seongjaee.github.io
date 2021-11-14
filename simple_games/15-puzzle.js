@@ -15,7 +15,7 @@ const blankPoint = [3, 3]
 const suffleBtn = document.querySelector('#suffleBtn')
 
 // 입력한 y, x좌표를 빈 칸으로 만들기
-const setBlank = function(y, x) {
+function setBlank(y, x) {
   const blankBlock = document.querySelector('.blank')
   const newBlankBlock = document.querySelector(`#_${y}${x}`)
   // 숫자 swap
@@ -30,7 +30,7 @@ const setBlank = function(y, x) {
 }
 
 // 보드판 섞기
-const shuffle = function() {
+function shuffle() {
   // 빈 칸을 맨 아래 오른쪽으로 설정
   setBlank(3, 3)
   blankPoint[0] = 3
@@ -64,7 +64,7 @@ const shuffle = function() {
 }
 
 // 클리어 확인
-const isCleared = function() {
+function isCleared() {
   for (let i=0; i<16; i++) {
     if (document.getElementById(blocksIds[i]).innerText != i + 1){
       return false
@@ -74,7 +74,7 @@ const isCleared = function() {
 }
 
 // 클리어 가능한 퍼즐인지 확인
-const isSolvable = function() {
+function isSolvable() {
   let cnt = 0
   blocksIds.forEach((id, index) => {
     const num = parseInt(document.getElementById(id).innerText)
@@ -93,7 +93,7 @@ suffleBtn.addEventListener('click', function(event) {
   shuffle()
 })
 
-const clickEventHandler = function(block) {
+function clickEventHandler(block) {
   const y = block.id[1]
   const x = block.id[2]
   const dy = y - blankPoint[0]

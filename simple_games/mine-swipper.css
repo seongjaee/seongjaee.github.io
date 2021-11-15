@@ -2,6 +2,7 @@ body {
   background-color: #f2fdff;
   padding-top: 4rem;
   user-select: none;
+  font-family: 'Quicksand', sans-serif;
 }
 
 table {
@@ -22,13 +23,18 @@ td {
 
 h1 {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   color: #011640;
 }
 
 img {
   width: 1em;
   height: 1em;
+}
+
+div {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .visited {

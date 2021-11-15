@@ -18,9 +18,11 @@ const DY = [-1, -1, -1, 0, 0, 1, 1, 1]
 
 const markedImgSrc = 'marker.png'
 const table = document.querySelector('table')
-const setMineNumber = (y, x) => Math.floor((y * x) / 6)
-let mineNumber = setMineNumber(Y, X)
+const setMineNumber = (y, x) => Math.floor((y * x) / 7)
+const flaggedCountTag = document.getElementById('flaggedCount')
+const mineNumber = setMineNumber(Y, X)
 
+let flaggedCount = mineNumber
 let grid = []
 let visited = []
 let cells = []
@@ -86,6 +88,10 @@ function countMineAround() {
   })
 }
 
+function renderflaggedCount(num){
+  flaggedCountTag.innerText = `: ${num}`
+}
+
 function checkPoint(y, x) {
   if (y < 0 || y >= Y || x < 0 || x >= X) {
     return
@@ -144,15 +150,18 @@ function onRightClick(event) {
   }
   if (event.target.tagName === 'IMG') {
     event.target.remove()
-  }
-  if (event.target.children.length) {
+    flaggedCount++
+  } else if (event.target.children.length) {
     const imgTag = event.target.children[0]
     event.target.removeChild(imgTag)
+    flaggedCount++
   } else {
     const markedImgTag = document.createElement('img')
     markedImgTag.setAttribute('src', markedImgSrc)
     event.target.appendChild(markedImgTag)
+    flaggedCount--
   }
+  renderflaggedCount(flaggedCount)
 }
 
 function onDoubleClick(event) {
@@ -210,6 +219,7 @@ function initGame() {
   makeTable(Y, X)
   plantMines()
   countMineAround()
+  renderflaggedCount(mineNumber)
   cells = document.querySelectorAll('td')
   cells.forEach(cell => {
     cell.addEventListener('click', event => onClick(event))

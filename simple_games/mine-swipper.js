@@ -215,6 +215,7 @@ function initGame() {
   cellIds = []
   mineIdList = []
   flaggedIdList = []
+  flaggedCount = mineNumber
   initGrid()
   makeTable(Y, X)
   plantMines()

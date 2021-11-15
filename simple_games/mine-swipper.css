@@ -26,11 +26,15 @@ h1 {
   color: #011640;
 }
 
+img {
+  width: 1em;
+  height: 1em;
+}
+
 .visited {
   background-color: #a8b3c0;
 }
 
-img {
-  width: 0.7em;
-  height: 1em;
+td:not(.nonclickable):hover {
+  opacity: 0.7;
 }

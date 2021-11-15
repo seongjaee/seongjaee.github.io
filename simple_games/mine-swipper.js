@@ -17,11 +17,8 @@ const DX = [-1, 0, 1, -1, 1, -1, 0, 1]
 const DY = [-1, -1, -1, 0, 0, 1, 1, 1] 
 
 const markedImgSrc = 'marker.png'
-const markedImgTag = document.createElement('img')
-markedImgTag.setAttribute('src', markedImgSrc)
-
 const table = document.querySelector('table')
-const setMineNumber = (y, x) => Math.floor((y * x) / 8)
+const setMineNumber = (y, x) => Math.floor((y * x) / 6)
 let mineNumber = setMineNumber(Y, X)
 
 let grid = []
@@ -105,9 +102,11 @@ function checkPoint(y, x) {
     setTimeout(() => {
       confirm('Boom!')
       initGame()
-    }, 0)
+    }, 10)
     
   } else if (!grid[y][x]) {
+
+    pointTd.setAttribute('class', 'visited nonclickable')
     for (let i=0; i<8; i++) {
       const ny = y + DY[i]
       const nx = x + DX[i]
@@ -143,10 +142,12 @@ function onRightClick(event) {
   if (visited[y][x]) {
     return
   }
+  if (event.target.tagName === 'IMG') {
+    event.target.remove()
+  }
   if (event.target.children.length) {
     const imgTag = event.target.children[0]
     event.target.removeChild(imgTag)
-
   } else {
     const markedImgTag = document.createElement('img')
     markedImgTag.setAttribute('src', markedImgSrc)

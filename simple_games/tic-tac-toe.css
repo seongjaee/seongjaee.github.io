@@ -55,3 +55,28 @@ table tr:nth-child(1) td {
 table tr:nth-child(3) td {
   border-bottom: 0;
 }
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+button {
+  width: 6rem;
+  height: 3rem;
+  border: none;
+  border-radius: 5%;
+  background-color: #ECDFC7;
+  font-size: large;
+}
+
+button:hover {
+  background-color: #ebd5ae;
+  cursor: pointer;
+}
+
+#hardBtn:hover {
+  cursor: default;
+  background-color: #ECDFC7;
+}

@@ -12,18 +12,21 @@
 </head>
 <body>
   <h1>Mine Swipper</h1>
-  <div>
-    <span>
+  <header>
+    <div class="flag">
       <img src="marker.png" alt="flag">
-    </span>
-    <span id="flaggedCount">: </span>
-  </div>
+      <span id="flaggedCount">: </span>
+    </div>
+    <div class="level-btn-container">
+      <select name="levelSelect" id="levelSelect">
+        <option value="easy">쉬움</option>
+        <option value="medium">보통</option>
+        <option value="hard">어려움</option>
+      </select>
+    </div>
+  </header>
   <table>
   </table>
-  <div class="level-btn-container">
-    <span class="easyLevelBtn btn">Easy</span> |
-    <span class="hardLevelBtn btn">Hard</span>
-  </div>
   <script src="mine-swipper.js"></script>
 </body>
 </html>

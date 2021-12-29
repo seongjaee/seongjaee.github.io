@@ -17,10 +17,16 @@ const markedImgSrc = 'marker.png'
 const table = document.querySelector('table')
 const setMineNumber = (y, x) => Math.floor((y * x) / 7)
 const flaggedCountTag = document.getElementById('flaggedCount')
+const levelVariables = {
+  easy: { X: 8, Y: 8 },
+  medium: { X: 16, Y: 12 },
+  hard: { X: 24, Y: 18 },
+}
+const levelSelector = document.getElementById('levelSelect')
+levelSelector.addEventListener('change', event => onChangeLevel(event))
 
-let Y = 10
-let X = 12
-let level = 1
+let Y = 8
+let X = 8
 let flaggedCount
 let mineNumber
 let grid = []
@@ -30,21 +36,11 @@ let cellIds = []
 let mineIdList = []
 let flaggedIdList = []
 
-function onClickLevelBtn(event) {
-  if (event.target.innerText === 'Easy' && level === 1) {
-    console.log('Click easy')
-    level = 0
-    Y = 8
-    X = 6
-    initGame()
-    
-  } else if (event.target.innerText === 'Hard' && level === 0) {
-    console.log('Click Hard')
-    level = 1
-    Y = 10
-    X = 12
-    initGame()
-  }
+function onChangeLevel(event) {
+  const level = levelVariables[event.target.value]
+  X = level.X
+  Y = level.Y
+  initGame()
 }
 
 function initGrid() {
@@ -56,7 +52,7 @@ function initGrid() {
   }
 }
 
-function makeTable() {
+function setupTable() {
   table.innerHTML = ''
   for (let i=0; i < Y; i++) {
     const trTag = document.createElement('tr')
@@ -232,14 +228,10 @@ function initGame() {
   cellIds = []
   mineIdList = []
   flaggedIdList = []
-  easyLevelBtn = document.querySelector('.easyLevelBtn')
-  easyLevelBtn.addEventListener('click', event => onClickLevelBtn(event))
-  hardLevelBtn = document.querySelector('.hardLevelBtn')
-  hardLevelBtn.addEventListener('click', event => onClickLevelBtn(event))
   mineNumber = setMineNumber(Y, X)
   flaggedCount = mineNumber
   initGrid()
-  makeTable(Y, X)
+  setupTable(Y, X)
   plantMines()
   countMineAround()
   renderflaggedCount(mineNumber)

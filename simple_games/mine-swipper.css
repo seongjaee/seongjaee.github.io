@@ -34,6 +34,10 @@ header {
   margin-bottom: 2rem;
 }
 
+select {
+  font-size: 1rem;
+}
+
 .flag {
   margin: 0 3rem;
   padding: auto 0;

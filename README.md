@@ -19,7 +19,7 @@
 
 - [Tic-Tac-Toe 하러가기](https://seongjaee.github.io/simple_games/tic-tac-toe.html)
   - 마우스 클릭으로 조작합니다.
-  - 모바일은 터치로 조가합니다.
+  - 모바일은 터치로 조작합니다.
 
 ### 지뢰 찾기 mine swipper
 

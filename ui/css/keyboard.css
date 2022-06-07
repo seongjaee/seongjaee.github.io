@@ -1,0 +1,27 @@
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* font-size: 1.5rem; */
+  width: 3rem;
+  min-width: 3rem;
+  height: 3rem;
+  border: 1px solid grey;
+}
+
+.key.on {
+  background-color: tomato;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.second-row {
+  margin-left: 2rem;
+}
+.third-row {
+  margin-left: 4rem;
+}
